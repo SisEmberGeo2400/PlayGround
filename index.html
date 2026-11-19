@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0b0d12" />
+  <title>Ashfall: Covenant of Cinders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="game">
+    <canvas id="world" aria-label="3D world"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">✦</div><div><span>ASHFALL</span><small>COVENANT OF CINDERS</small></div></div>
+      <div class="realm-label"><span class="realm-dot"></span> THE SHATTERED VEIL <i>•</i> <b>ACT I</b></div>
+      <div class="top-actions"><button class="icon-btn" id="audio-btn" title="Toggle sound">♫</button><button class="icon-btn" id="help-btn" title="Controls">?</button><button class="avatar-btn">✧ <span>LV <b id="level-top">01</b></span></button></div>
+    </header>
+    <section class="hero-panel">
+      <div class="eyebrow"><span class="eyebrow-line"></span><span id="faction-eyebrow">VEILWALKER · THE EXILED</span></div>
+      <h1 id="hero-name">Cinder<br><em>Hollow</em></h1>
+      <p class="hero-sub">THE BORDERLANDS <span>—</span> <b>FREE ROAM</b></p>
+      <div class="objective"><div class="objective-icon">⌖</div><div><small>ACTIVE OBJECTIVE <span>01</span></small><b id="objective-text">Clear the Ashen Watch</b><div class="progress-track"><i id="objective-progress"></i></div></div><strong id="objective-count">0 / 3</strong></div>
+    </section>
+    <div class="left-rail">
+      <div class="profile-card"><div class="class-icon" id="class-icon">✧</div><div class="profile-data"><small id="faction-name">ORDER OF DAWN</small><b id="class-name">Vanguard</b><div class="level-line"><span>LEVEL <b id="level">01</b></span><i></i><span id="xp-label">0 / 100 XP</span></div><div class="xp-track"><i id="xp-bar"></i></div></div></div>
+      <div class="vitals"><div class="vital-row"><span>♥ <b>VITALITY</b></span><div class="vital-track"><i id="health-bar"></i></div><strong id="health-label">100</strong></div><div class="vital-row mana"><span>✧ <b>ESSENCE</b></span><div class="vital-track"><i id="mana-bar"></i></div><strong id="mana-label">100</strong></div></div>
+      <div class="resource-row"><span>◈ <b id="shard-count">24</b> <small>SHARDS</small></span><span>⌘ <b id="ember-count">6</b> <small>EMBER</small></span></div>
+    </div>
+    <aside class="right-rail">
+      <div class="map-card"><div class="map-head"><span>⊙ <b>FIELD MAP</b></span><span class="map-coords">X <b id="coord-x">00</b> · Z <b id="coord-z">00</b></span></div><div class="mini-map" id="mini-map"><div class="map-grid"></div><span class="map-point altar-point">✧</span><span class="map-point player-point" id="map-player">▲</span><span class="map-compass">N</span></div><div class="map-foot"><span><i class="legend-player"></i> YOU</span><span><i class="legend-enemy"></i> HOSTILES <b id="enemy-count">3</b></span></div></div>
+      <div class="quick-nav"><button data-panel="inventory"><i>▤</i><span>INVENTORY</span><b>I</b></button><button data-panel="forge"><i>⚒</i><span>BLACKSMITH</span><b>F</b></button><button data-panel="story"><i>◇</i><span>CHRONICLE</span><b>J</b></button></div>
+      <div class="hint-card"><span class="hint-star">✦</span><div><small>VEIL WHISPERS</small><p id="whisper">“Every oath leaves a mark upon the soul.”</p></div></div>
+    </aside>
+    <div class="combat-feed" id="combat-feed"></div>
+    <div class="interaction" id="interaction"><span class="keycap">E</span><span id="interaction-label">Speak with the Veilkeeper</span></div>
+    <div class="bottom-ui">
+      <div class="weapon-widget"><span class="weapon-art">⚔</span><div><small>WIELDED WEAPON</small><b id="weapon-label">Dawncleaver <i>✦</i></b><span id="weapon-type">RADIANT GREATSWORD · RARE</span></div><div class="weapon-durability"><i></i></div></div>
+      <div class="ability-bar"><div class="ability-label"><span>COMBAT ARTS</span><small>PRESS <b>1—4</b> OR TAP</small></div><div class="abilities"><button class="ability active" data-ability="1"><span class="ability-key">1</span><i>⚔</i><small>RIFT SLASH</small><div class="cooldown" id="cooldown-1"></div></button><button class="ability" data-ability="2"><span class="ability-key">2</span><i>✧</i><small>WARD</small><div class="cooldown" id="cooldown-2"></div></button><button class="ability" data-ability="3"><span class="ability-key">3</span><i>◈</i><small>EMBER NOVA</small><div class="cooldown" id="cooldown-3"></div></button><button class="ability ultimate" data-ability="4"><span class="ability-key">R</span><i>☼</i><small>DIVINE WRATH</small><div class="cooldown" id="cooldown-4"></div></button></div></div>
+      <div class="mode-card"><div class="mode-symbol">☠</div><div><small>GAME MODE</small><b>LAST ONE STANDING</b><span>SOLO · FREE FOR ALL</span></div><button id="wave-btn">↻</button></div>
+    </div>
+    <div class="touch-stick" id="touch-stick"><div class="stick-ring"><div class="stick-knob" id="stick-knob"></div></div><small>MOVE</small></div>
+    <div class="mobile-actions"><button data-ability="1">⚔</button><button data-ability="2">✧</button><button data-ability="3">◈</button></div>
+    <div class="toast" id="toast"></div>
+    <div class="panel-scrim" id="panel-scrim"><section class="panel" id="panel"><button class="panel-close" id="panel-close">×</button><div id="panel-content"></div></section></div>
+    <div class="start-screen" id="start-screen"><div class="start-backdrop"></div><div class="start-content"><div class="start-kicker">A WORLD DIVIDED. A SOUL UNBOUND.</div><h2>CHOOSE YOUR<br><em>ALLEGIANCE</em></h2><p>The veil is breaking. Your blood will decide what rises from the ash.</p><div class="faction-options"><button class="faction-choice angel" data-faction="angel"><span class="faction-sigil">☼</span><span class="choice-tag">THE RADIANT HOST</span><b>ORDER OF<br>THE DAWN</b><small>Discipline · Wards · Radiance</small><i>CHOOSE THE LIGHT <span>→</span></i></button><button class="faction-choice demon" data-faction="demon"><span class="faction-sigil">♆</span><span class="choice-tag">THE ABYSSAL COURT</span><b>LEGION OF<br>THE VEIL</b><small>Fury · Flame · Shadow</small><i>EMBRACE THE DARK <span>→</span></i></button></div><div class="start-note">YOUR CHOICE SHAPES THE CHRONICLE <span>◆</span> SOLO EXPLORATION</div></div></div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
